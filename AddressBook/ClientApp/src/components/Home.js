@@ -6,23 +6,23 @@ export function Home() {
 }
 
 
-function GetAddresses() {
-    const [data, setData] = useState([]);
-    // This does not work: It sucessfully fetches but then dies when returning the table
-    //const response = await fetch('addressbook');
-    //const data = await response.json();
+async function GetAddresses() {
+    //const [data, setData] = useState([]);
+    // This does not work: It successfully fetches but then dies when returning the table
+    const response = await fetch('addressbook');
+    const data     = await response.json();
 
     // This works
-    useEffect(() => {
-        fetch('addressbook')
-            .then(response => {
-                if (response.ok) return response.json();
-                throw response;
-            })
-            .then(json => {
-                setData(json);
-            });
-    }, []);
+    //useEffect(() => {
+    //    fetch('addressbook')
+    //        .then(response => {
+    //            if (response.ok) return response.json();
+    //            throw response;
+    //        })
+    //        .then(json => {
+    //            setData(json);
+    //        });
+    //}, []);
 
     // This kind of works, but has odd side effects in the ui
     //useEffect(async () => {
