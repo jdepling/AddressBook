@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AddressBook.Infrastructure;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,15 +11,21 @@ namespace AddressBook.Controllers
     [Route("[controller]")]
     public class AddressBookController
     {
+        private IAddressService _addressService;
+        public AddressBookController(IAddressService addressService)
+        {
+            _addressService = addressService;
+        }
         [HttpGet]
         public IEnumerable<Address> Get()
         {
-            return new List<Address>()
-            {
-                new Address("Harry", "Potter", "123 A Street", "New York", "New York", "8555"),
-                new Address("Ronald", "Smith", "1234 B Street", "San Jose", "California", "76543"),
-                new Address("Ryan", "Andrews", "1234 C Street", "San Jose", "California", "76543"),
-            };
+            return _addressService.GetAddresses();
+        }
+
+        [HttpPost]
+        public Address AddRecord(Address address)
+        {
+            return _addressService.AddAddresses(address);
         }
     }
 }
