@@ -6,31 +6,17 @@ export function Home() {
 }
 
 
-async function GetAddresses() {
-    //const [data, setData] = useState([]);
-    // This does not work: It successfully fetches but then dies when returning the table
-    const response = await fetch('addressbook');
-    const data     = await response.json();
+function GetAddresses() {
+    const [data, setData] = useState([]);
 
-    // This works
-    //useEffect(() => {
-    //    fetch('addressbook')
-    //        .then(response => {
-    //            if (response.ok) return response.json();
-    //            throw response;
-    //        })
-    //        .then(json => {
-    //            setData(json);
-    //        });
-    //}, []);
-
-    // This kind of works, but has odd side effects in the ui
-    //useEffect(async () => {
-    //    var response = await fetch('addressbook');
-    //    var info     = await response.json();
-    //    setData(info);
-    //}, []);
-
+    useEffect(() => {
+        const fetchData = async () => {
+            var response = await fetch('addressbook');
+            var info = await response.json();
+            setData(info);
+        }
+        fetchData();
+    }, []);
 
     return (
         <table className='table table-striped' aria-labelledby="tabelLabel">
