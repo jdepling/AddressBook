@@ -1,17 +1,20 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace AddressBook
 {
     public class Address
     {
+        /// <summary>
+        /// Deserialization requires a parameterless constructor
+        /// </summary>
         public Address()
         {
 
         }
 
+        /// <summary>
+        /// Constructor for c# code
+        /// </summary>
         public Address(string firstName, string lastName, string streetAddress, string city, string state, string zipCode)
         {
             FirstName     = firstName     ?? throw new ArgumentNullException(nameof(firstName));
