@@ -1,11 +1,11 @@
 import React, { useState, useEffect} from 'react';
 
 export function Home() {
-
-    return (<GetAddresses/>);
+    const [viewId, setViewId] = useState(1)
+    return (<GetAddresses key={viewId} startAgain={() => setViewId(viewId + 1)}/>);
 }
 
-const Delete = async (index) => {
+const Delete = async (index, startAgain) => {
     const other_params = {
         headers: { "content-type": "application/json; charset=UTF-8" },
         method: "DELETE",
@@ -14,13 +14,13 @@ const Delete = async (index) => {
     var response = await fetch('addressbook/' + index, other_params);
     var removedRecord = await response.json();
 
-    window.location.reload(false);
-
     alert(`index removed: ${removedRecord.firstName}`);
+
+    startAgain(); // calls the inline function on the startAgain prop in the GetAddresses component in the Home function
 }
 
 
-function GetAddresses() {
+function GetAddresses(props) {
     const [data, setData] = useState([]);
 
     useEffect(() => {
@@ -47,7 +47,7 @@ function GetAddresses() {
             <tbody>
                 {data.map((info, index) =>
                     <tr>
-                        <td><button onClick={()=>Delete(index)} style={{ color: "red", fontSize: 10, borderStyle: "thin" }}>x</button>{info.firstName}</td>
+                        <td><button onClick={() => Delete(index, props.startAgain)} style={{ color: "red", fontSize: 10, borderStyle: "thin" }}>x</button>{info.firstName}</td>
                         <td>{info.lastName}</td>
                         <td>{info.streetAddress}</td>
                         <td>{info.city}</td>
