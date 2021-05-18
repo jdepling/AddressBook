@@ -5,6 +5,20 @@ export function Home() {
     return (<GetAddresses/>);
 }
 
+const Delete = async (index) => {
+    const other_params = {
+        headers: { "content-type": "application/json; charset=UTF-8" },
+        method: "DELETE",
+        mode: "cors"
+    };
+    var response = await fetch('addressbook/' + index, other_params);
+    var removedRecord = await response.json();
+
+    window.location.reload(false);
+
+    alert(`index removed: ${removedRecord.firstName}`);
+}
+
 
 function GetAddresses() {
     const [data, setData] = useState([]);
@@ -31,15 +45,15 @@ function GetAddresses() {
                 </tr>
             </thead>
             <tbody>
-                {data.map(info =>
+                {data.map((info, index) =>
                     <tr>
-                        <td>{info.firstName}</td>
+                        <td><button onClick={()=>Delete(index)} style={{ color: "red", fontSize: 10, borderStyle: "thin" }}>x</button>{info.firstName}</td>
                         <td>{info.lastName}</td>
                         <td>{info.streetAddress}</td>
                         <td>{info.city}</td>
                         <td>{info.state}</td>
                         <td>{info.zipCode}</td>
-                        </tr>
+                    </tr>
                     )}
             </tbody>
         </table>

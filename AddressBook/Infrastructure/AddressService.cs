@@ -29,5 +29,12 @@ namespace AddressBook.Infrastructure
         {
             return _addresses;
         }
+
+        public Address RemoveAddress(int id)
+        {
+            var address = _addresses[id];
+            _addresses.RemoveAt(id);
+            return address;
+        }
     }
 }

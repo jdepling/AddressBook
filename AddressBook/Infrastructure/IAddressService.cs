@@ -9,5 +9,6 @@ namespace AddressBook.Infrastructure
     {
         public List<Address> GetAddresses();
         public Address AddAddresses(Address address);
+        public Address RemoveAddress(int id);
     }
 }
