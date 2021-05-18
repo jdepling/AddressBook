@@ -30,10 +30,10 @@ namespace AddressBook.Infrastructure
             return _addresses;
         }
 
-        public Address RemoveAddress(int id)
+        public Address RemoveAddress(Guid id)
         {
-            var address = _addresses[id];
-            _addresses.RemoveAt(id);
+            var address = _addresses.Where(a => a.Id == id).FirstOrDefault();
+            _addresses.Remove(address);
             return address;
         }
     }

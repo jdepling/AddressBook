@@ -20,8 +20,10 @@ namespace AddressBook
             City          = city          ?? throw new ArgumentNullException(nameof(city));
             State         = state         ?? throw new ArgumentNullException(nameof(state));
             ZipCode       = zipCode       ?? throw new ArgumentNullException(nameof(zipCode));
+            Id            = Guid.NewGuid();
         }
 
+        public Guid Id { get; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string StreetAddress { get; set; }

@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace AddressBook.Infrastructure
 {
@@ -9,6 +7,6 @@ namespace AddressBook.Infrastructure
     {
         public List<Address> GetAddresses();
         public Address AddAddresses(Address address);
-        public Address RemoveAddress(int id);
+        public Address RemoveAddress(Guid id);
     }
 }

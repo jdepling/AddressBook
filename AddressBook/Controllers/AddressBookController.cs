@@ -29,7 +29,7 @@ namespace AddressBook.Controllers
         }
 
         [HttpDelete("{id}")]
-        public Address RemoveRecord(int id)
+        public Address RemoveRecord(Guid id)
         {
             return _addressService.RemoveAddress(id);
         }

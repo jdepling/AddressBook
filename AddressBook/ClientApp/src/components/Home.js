@@ -5,16 +5,16 @@ export function Home() {
     return (<GetAddresses key={viewId} startAgain={() => setViewId(viewId + 1)}/>);
 }
 
-const Delete = async (index, startAgain) => {
+const Delete = async (id, startAgain) => {
     const other_params = {
         headers: { "content-type": "application/json; charset=UTF-8" },
         method: "DELETE",
         mode: "cors"
     };
-    var response = await fetch('addressbook/' + index, other_params);
+    var response = await fetch('addressbook/' + id, other_params);
     var removedRecord = await response.json();
 
-    alert(`index removed: ${removedRecord.firstName}`);
+    alert(`Record removed for: ${removedRecord.firstName} ${removedRecord.lastName}`);
 
     startAgain(); // calls the inline function on the startAgain prop in the GetAddresses component in the Home function
 }
@@ -45,9 +45,9 @@ function GetAddresses(props) {
                 </tr>
             </thead>
             <tbody>
-                {data.map((info, index) =>
+                {data.map((info) =>
                     <tr>
-                        <td><button onClick={() => Delete(index, props.startAgain)} style={{ color: "red", fontSize: 10, borderStyle: "thin" }}>x</button>{info.firstName}</td>
+                        <td key={info.id}><button onClick={() => Delete(info.id, props.startAgain)} style={{ color: "red", fontSize: 10, borderStyle: "thin" }}>x</button>{info.firstName}</td>
                         <td>{info.lastName}</td>
                         <td>{info.streetAddress}</td>
                         <td>{info.city}</td>
